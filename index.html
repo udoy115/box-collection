@@ -137,12 +137,20 @@
       </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════ SALES TICKER ═══ -->
+    <div class="sales-ticker" id="salesTicker" aria-live="polite" aria-atomic="true">
+      <div class="ticker-inner">
+        <span class="ticker-dot"></span>
+        <span class="ticker-text" id="tickerText">⚡ Loading recent orders…</span>
+      </div>
+    </div>
+
     <!-- ═══════════════════════════════════════════ BUNDLES ═══ -->
     <section class="bundles-section section" id="bundles">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head">
           <span class="section-eyebrow">Our Collections</span>
-          <h2 class="section-title">Our Best Selling Combos</h2>
+          <h2 class="section-title">The Combo</h2>
           <p class="section-sub">Every bundle is a story waiting to happen. Individual book prices shown in <span
               class="price-sample">green</span> — see exactly what you save with each combo!</p>
         </div>
@@ -196,7 +204,7 @@
     <!-- ═══════════════════════════════════════════ HOW IT WORKS ═══ -->
     <section class="how-section section" id="how-it-works">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head">
           <span class="section-eyebrow">Simple &amp; Easy</span>
           <h2 class="section-title">How it works</h2>
           <p class="section-sub">Three easy steps between you and your next great read.</p>
@@ -237,6 +245,40 @@
             <div class="step-number">03</div>
             <h3 class="step-title">We confirm &amp; ship</h3>
             <p class="step-desc">We'll reach out to confirm your order and dispatch your bundle with love.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ TRUST BADGES ═══ -->
+    <section class="trust-strip" aria-label="Why shop with us">
+      <div class="container trust-strip-inner">
+        <div class="trust-badge">
+          <div class="trust-badge-icon">🚚</div>
+          <div class="trust-badge-text">
+            <strong>Fast Delivery</strong>
+            <span>Dhaka & nationwide</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">🔄</div>
+          <div class="trust-badge-text">
+            <strong>Easy Exchange</strong>
+            <span>7-day hassle-free</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">💵</div>
+          <div class="trust-badge-text">
+            <strong>Cash on Delivery</strong>
+            <span>bKash & Nagad too</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="trust-badge-icon">📞</div>
+          <div class="trust-badge-text">
+            <strong>Order Confirmed</strong>
+            <span>We call before shipping</span>
           </div>
         </div>
       </div>
@@ -424,6 +466,17 @@
       </div>
     </div>
   </footer>
+
+  <!-- ═══════════════════════════════════════════ STICKY MOBILE CTA ═══ -->
+  <div class="sticky-cta-bar" id="stickyCta" aria-hidden="true">
+    <div class="sticky-cta-inner">
+      <div class="sticky-cta-info">
+        <span class="sticky-cta-label">🛒 Your cart</span>
+        <strong class="sticky-cta-total" id="stickyCtaTotal">0 Tk</strong>
+      </div>
+      <a href="#order" class="btn btn-primary sticky-cta-btn" id="stickyCtaBtn">Order Now →</a>
+    </div>
+  </div>
 
   <script src="main.js"></script>
 </body>

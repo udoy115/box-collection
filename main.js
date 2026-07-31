@@ -799,3 +799,108 @@ renderBundles();
 renderCustomBuilder();
 updateCartUI();
 updateOrderBundleSelect();
+
+// ── 18. Live Sales Ticker ─────────────────────────────────────────
+(function initSalesTicker() {
+  const tickerEl = document.getElementById('tickerText');
+  if (!tickerEl) return;
+
+  const cities = [
+    'Dhaka', 'Chittagong', 'Sylhet', 'Rajshahi', 'Khulna',
+    'Comilla', 'Mymensingh', 'Narsingdi', 'Gazipur', 'Bogura'
+  ];
+  const bundleNames = BUNDLES.map(b => b.name);
+
+  function randomFrom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  function randomMinutes() {
+    return Math.floor(Math.random() * 18) + 1;
+  }
+  function randomOrders() {
+    return Math.floor(Math.random() * 8) + 2;
+  }
+
+  // Pool of message templates
+  const templates = [
+    () => `⚡ Someone from ${randomFrom(cities)} just ordered "${randomFrom(bundleNames)}" — ${randomMinutes()} min ago`,
+    () => `🔥 ${randomOrders()} bundles ordered in the last hour — spots filling fast!`,
+    () => `⚡ "${randomFrom(bundleNames)}" is trending today — ordered ${randomOrders()} times already`,
+    () => `📦 A reader from ${randomFrom(cities)} just completed their order — ${randomMinutes()} min ago`,
+    () => `✅ ${randomOrders()} happy readers placed orders today. Join them!`,
+    () => `⚡ Someone from ${randomFrom(cities)} picked "${randomFrom(bundleNames)}" — ${randomMinutes()} min ago`,
+  ];
+
+  let currentIdx = 0;
+
+  function nextMessage() {
+    // Fade out
+    tickerEl.classList.add('fade-out');
+    tickerEl.classList.remove('fade-in');
+
+    setTimeout(() => {
+      currentIdx = (currentIdx + 1) % templates.length;
+      tickerEl.textContent = templates[currentIdx]();
+      tickerEl.classList.remove('fade-out');
+      tickerEl.classList.add('fade-in');
+    }, 370);
+  }
+
+  // Show first message immediately
+  tickerEl.textContent = templates[0]();
+  tickerEl.classList.add('fade-in');
+
+  // Rotate every 5 seconds
+  setInterval(nextMessage, 5000);
+})();
+
+// ── 19. Sticky Mobile CTA Bar ─────────────────────────────────────
+(function initStickyCta() {
+  const bar       = document.getElementById('stickyCta');
+  const totalEl   = document.getElementById('stickyCtaTotal');
+  const heroEl    = document.getElementById('hero');
+  const orderEl   = document.getElementById('order');
+
+  if (!bar || !heroEl || !orderEl) return;
+
+  let heroGone  = false;
+  let orderVisible = false;
+
+  function updateBar() {
+    // Sync total from main cart total
+    const cartTotalEl = document.getElementById('cartTotal');
+    if (cartTotalEl && totalEl) {
+      totalEl.textContent = cartTotalEl.textContent || '0 Tk';
+    }
+
+    const shouldShow = heroGone && !orderVisible;
+    bar.classList.toggle('visible', shouldShow);
+    bar.setAttribute('aria-hidden', String(!shouldShow));
+  }
+
+  // Watch hero leaving viewport (so bar appears after scrolling past it)
+  const heroObs = new IntersectionObserver(
+    ([entry]) => { heroGone = !entry.isIntersecting; updateBar(); },
+    { threshold: 0.1 }
+  );
+  heroObs.observe(heroEl);
+
+  // Watch order section entering viewport (so bar hides near form)
+  const orderObs = new IntersectionObserver(
+    ([entry]) => { orderVisible = entry.isIntersecting; updateBar(); },
+    { threshold: 0.15 }
+  );
+  orderObs.observe(orderEl);
+
+  // Re-sync total whenever cart changes (hook into existing updateCartUI)
+  const origUpdateCartUI = window.updateCartUI;
+  if (typeof origUpdateCartUI === 'function') {
+    window.updateCartUI = function(...args) {
+      origUpdateCartUI(...args);
+      updateBar();
+    };
+  }
+
+  // Also update on scroll for total sync
+  document.addEventListener('scroll', updateBar, { passive: true });
+})();
