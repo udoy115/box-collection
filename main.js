@@ -1,146 +1,27 @@
-/* ════════════════════════════════════════════════════════════
-   Box Collection — Main JavaScript
-   ════════════════════════════════════════════════════════════ */
+﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   Box Collection â€” Main JavaScript
+   Data (BUNDLES, ALL_BOOKS) is loaded from data.js
+   which must appear before this script in index.html.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-// ── 1. Data ───────────────────────────────────────────────────────
+// â”€â”€ 1. Cart Key (shared with combo.js via localStorage) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const CART_KEY = 'bc_cart';
 
-const BUNDLES = [
-  {
-    id: 'wealth-builder',
-    name: 'The Wealth Builder',
-    subtitle: 'Money Combo',
-    comboPrice: 949,
-    image: 'https://i.postimg.cc/NfCMC19F/Chat-GPT-Image-Jul-26-2026-08-58-53-PM.png',
-    strategy: 'Focused on financial mindset and moving from employee to investor.',
-    tag: '💰',
-    books: [
-      { title: 'The Psychology of Money', author: 'Morgan Housel', price: 170 },
-      { title: 'Rich Dad Poor Dad', author: 'Robert Kiyosaki', price: 170 },
-      { title: 'The Richest Man in Babylon', author: 'George S. Clason', price: 160 },
-      { title: 'Think and Grow Rich', author: 'Napoleon Hill', price: 170 },
-      { title: 'Zero to One', author: 'Peter Thiel', price: 140 },
-    ],
-  },
-  {
-    id: 'startup-founder',
-    name: 'The Startup Founder',
-    subtitle: 'Business Combo',
-    comboPrice: 1049,
-    image: 'https://i.postimg.cc/44QqGGgg/Chat-GPT-Image-Jul-26-2026-09-51-32-PM.png',
-    strategy: 'Practical startup guides plus an iconic brand-building story.',
-    tag: '🚀',
-    books: [
-      { title: 'The Lean Startup', author: 'Eric Ries', price: 200 },
-      { title: 'Zero to One', author: 'Peter Thiel', price: 140 },
-      { title: 'Start With Why', author: 'Simon Sinek', price: 160 },
-      { title: 'The $100 Startup', author: 'Chris Guillebeau', price: 160 },
-      { title: 'Shoe Dog', author: 'Phil Knight', price: 250 },
-    ],
-  },
-  {
-    id: 'high-achiever',
-    name: 'The High Achiever',
-    subtitle: 'Productivity Combo',
-    comboPrice: 949,
-    image: 'https://i.postimg.cc/44QqGGgg/Chat-GPT-Image-Jul-26-2026-09-51-32-PM.png',
-    strategy: 'Mental toughness, deep focus and finding your life\'s purpose.',
-    tag: '⚡',
-    books: [
-      { title: 'Atomic Habits', author: 'James Clear', price: 160 },
-      { title: 'Deep Work', author: 'Cal Newport', price: 160 },
-      { title: 'Eat That Frog!', author: 'Brian Tracy', price: 110 },
-      { title: 'The 7 Habits of Highly Effective People', author: 'Stephen R. Covey', price: 200 },
-      { title: 'Ikigai', author: 'Héctor García & Francesc Miralles', price: 150 },
-    ],
-  },
-  {
-    id: 'worldview-expander',
-    name: 'The Worldview Expander',
-    subtitle: 'History & Biography Combo',
-    comboPrice: 1190,
-    image: 'https://i.postimg.cc/gcwVmq8P/Chat-GPT-Image-Jul-26-2026-10-25-18-PM.png',
-    strategy: 'Existential history balanced with inspiring real-world biographies.',
-    tag: '🌍',
-    books: [
-      { title: 'Sapiens: A Brief History of Humankind', author: 'Yuval Noah Harari', price: 260 },
-      { title: 'Steve Jobs', author: 'Walter Isaacson', price: 180 },
-      { title: 'Elon Musk', author: 'Ashlee Vance', price: 200 },
-      { title: 'Wings of Fire', author: 'A.P.J. Abdul Kalam', price: 150 },
-      { title: 'Homo Deus: A Brief History of Tomorrow', author: 'Yuval Noah Harari', price: 250 },
-    ],
-  },
-  {
-    id: 'worldwide-bestseller',
-    name: 'The Worldwide Best Seller',
-    subtitle: 'Mystery & Thriller Combo',
-    comboPrice: 1249,
-    image: 'https://i.postimg.cc/6qzchqzj/Chat-GPT-Image-Jul-27-2026-02-02-04-PM.png',
-    strategy: 'The complete Dan Brown experience — impossible to put down.',
-    tag: '🔍',
-    books: [
-      { title: 'The Da Vinci Code', author: 'Dan Brown', price: 210 },
-      { title: 'Angels and Demons', author: 'Dan Brown', price: 210 },
-      { title: 'The Lost Symbol', author: 'Dan Brown', price: 220 },
-      { title: 'Inferno', author: 'Dan Brown', price: 210 },
-      { title: 'Origin', author: 'Dan Brown', price: 230 },
-    ],
-  },
-  {
-    id: 'love-combo',
-    name: 'The Love Combo',
-    subtitle: 'Chetan Bhagat Combo',
-    comboPrice: 1029,
-    image: 'https://i.postimg.cc/QCy3y8dY/Chat-GPT-Image-Jul-27-2026-02-20-13-PM.png',
-    strategy: 'Beginner-level English fiction — heartfelt stories of love and modern India.',
-    tag: '❤️',
-    books: [
-      { title: 'Five Point Someone', author: 'Chetan Bhagat', price: 200 },
-      { title: '2 States', author: 'Chetan Bhagat', price: 200 },
-      { title: 'Revolution 2020', author: 'Chetan Bhagat', price: 200 },
-      { title: 'One Indian Girl', author: 'Chetan Bhagat', price: 200 },
-      { title: 'One Arranged Murder', author: 'Chetan Bhagat', price: 200 },
-    ],
-  },
-];
+function loadCartFromStorage() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+  catch { return []; }
+}
 
-const ALL_BOOKS = [
-  { id: 'b1', title: 'The Psychology of Money', author: 'Morgan Housel', price: 170, category: 'Finance' },
-  { id: 'b2', title: 'Rich Dad Poor Dad', author: 'Robert Kiyosaki', price: 170, category: 'Finance' },
-  { id: 'b3', title: 'The Richest Man in Babylon', author: 'George S. Clason', price: 160, category: 'Finance' },
-  { id: 'b4', title: 'Think and Grow Rich', author: 'Napoleon Hill', price: 170, category: 'Finance' },
-  { id: 'b5', title: 'Zero to One', author: 'Peter Thiel', price: 140, category: 'Business' },
-  { id: 'b6', title: 'The Lean Startup', author: 'Eric Ries', price: 200, category: 'Business' },
-  { id: 'b7', title: 'Start With Why', author: 'Simon Sinek', price: 160, category: 'Business' },
-  { id: 'b8', title: 'The $100 Startup', author: 'Chris Guillebeau', price: 160, category: 'Business' },
-  { id: 'b9', title: 'Shoe Dog', author: 'Phil Knight', price: 250, category: 'Business' },
-  { id: 'b10', title: 'Atomic Habits', author: 'James Clear', price: 160, category: 'Productivity' },
-  { id: 'b11', title: 'Deep Work', author: 'Cal Newport', price: 160, category: 'Productivity' },
-  { id: 'b12', title: 'Eat That Frog!', author: 'Brian Tracy', price: 110, category: 'Productivity' },
-  { id: 'b13', title: 'The 7 Habits of Highly Effective People', author: 'Stephen R. Covey', price: 200, category: 'Productivity' },
-  { id: 'b14', title: 'Ikigai', author: 'Héctor García & Francesc Miralles', price: 150, category: 'Productivity' },
-  { id: 'b15', title: 'Sapiens', author: 'Yuval Noah Harari', price: 260, category: 'History & Bio' },
-  { id: 'b16', title: 'Steve Jobs', author: 'Walter Isaacson', price: 180, category: 'History & Bio' },
-  { id: 'b17', title: 'Elon Musk', author: 'Ashlee Vance', price: 200, category: 'History & Bio' },
-  { id: 'b18', title: 'Wings of Fire', author: 'A.P.J. Abdul Kalam', price: 150, category: 'History & Bio' },
-  { id: 'b19', title: 'Homo Deus', author: 'Yuval Noah Harari', price: 250, category: 'History & Bio' },
-  { id: 'b20', title: 'The Da Vinci Code', author: 'Dan Brown', price: 210, category: 'Mystery & Thriller' },
-  { id: 'b21', title: 'Angels and Demons', author: 'Dan Brown', price: 210, category: 'Mystery & Thriller' },
-  { id: 'b22', title: 'The Lost Symbol', author: 'Dan Brown', price: 220, category: 'Mystery & Thriller' },
-  { id: 'b23', title: 'Inferno', author: 'Dan Brown', price: 210, category: 'Mystery & Thriller' },
-  { id: 'b24', title: 'Origin', author: 'Dan Brown', price: 230, category: 'Mystery & Thriller' },
-  { id: 'b25', title: 'Five Point Someone', author: 'Chetan Bhagat', price: 200, category: 'Fiction' },
-  { id: 'b26', title: '2 States', author: 'Chetan Bhagat', price: 200, category: 'Fiction' },
-  { id: 'b27', title: 'Revolution 2020', author: 'Chetan Bhagat', price: 200, category: 'Fiction' },
-  { id: 'b28', title: 'One Indian Girl', author: 'Chetan Bhagat', price: 200, category: 'Fiction' },
-  { id: 'b29', title: 'One Arranged Murder', author: 'Chetan Bhagat', price: 200, category: 'Fiction' },
-];
-
-// ── 2. State ──────────────────────────────────────────────────────
-let cart = [];
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+// (BUNDLES and ALL_BOOKS globals come from data.js)
+// â”€â”€ 2. State â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+let cart = loadCartFromStorage();
 let selectedBookIds = new Set();
 let activeCategory = 'All';
 
-// ── 3. Intersection Observer (reveal) ────────────────────────────
+// â”€â”€ 3. Intersection Observer (reveal) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -156,7 +37,7 @@ function observeReveal(el, delay = 0) {
   revealObs.observe(el);
 }
 
-// ── 4. Bundle Rendering ───────────────────────────────────────────
+// â”€â”€ 4. Bundle Rendering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderBundles() {
   const grid = document.getElementById('bundlesGrid');
   if (!grid) return;
@@ -172,7 +53,7 @@ function renderBundles() {
     card.setAttribute('aria-label', bundle.name);
     card.innerHTML = `
       <div class="card-img-wrap">
-        <img src="${bundle.image}" alt="${bundle.name} — ${bundle.subtitle}" loading="lazy" onerror="this.style.display='none'" />
+        <img src="${bundle.image}" alt="${bundle.name} â€” ${bundle.subtitle}" loading="lazy" onerror="this.style.display='none'" />
         <span class="card-tag">${bundle.tag} ${bundle.subtitle}</span>
         <div class="savings-badge">Save ${savings} Tk</div>
       </div>
@@ -196,11 +77,11 @@ function renderBundles() {
           </div>
           <div class="card-actions">
             <button class="btn btn-ghost btn-sm" id="cart-btn-${bundle.id}" onclick="addBundleToCart('${bundle.id}')">
-              🛒 Add to Cart
+              ðŸ›’ Add to Cart
             </button>
-            <button class="btn btn-primary btn-sm" id="order-btn-${bundle.id}" onclick="orderBundle('${bundle.id}')">
-              Order Now
-            </button>
+            <a href="combo.html?id=${bundle.id}" class="btn btn-primary btn-sm">
+              View Details â†’
+            </a>
           </div>
         </div>
       </div>
@@ -216,16 +97,16 @@ function renderBundles() {
   customCard.setAttribute('aria-label', 'Build Your Own Customized Combo');
   customCard.innerHTML = `
     <div class="custom-card-header">
-      <div class="custom-card-icon">✨</div>
+      <div class="custom-card-icon">âœ¨</div>
       <span class="custom-card-badge">Customized Combo</span>
     </div>
     <div class="card-body">
       <h3 class="card-name">Build Your Own Combo</h3>
       <p class="card-strategy">"Pick any 5 or more books from our entire collection across all genres to create your custom reading bundle."</p>
       <ul class="card-books" aria-label="Custom combo features">
-        <li><span class="book-title-text">📚 29 Bestsellers to pick from</span></li>
-        <li><span class="book-title-text">🎨 Choose from any genre</span></li>
-        <li><span class="book-title-text">⚡ Minimum 5 books required</span></li>
+        <li><span class="book-title-text">ðŸ“š 29 Bestsellers to pick from</span></li>
+        <li><span class="book-title-text">ðŸŽ¨ Choose from any genre</span></li>
+        <li><span class="book-title-text">âš¡ Minimum 5 books required</span></li>
       </ul>
       <div class="card-footer">
         <div class="price-info">
@@ -234,7 +115,7 @@ function renderBundles() {
         </div>
         <div class="card-actions" style="grid-template-columns: 1fr;">
           <button class="btn btn-custom btn-md" onclick="openCustomBuilder()">
-            ✨ Create Custom Combo
+            âœ¨ Create Custom Combo
           </button>
         </div>
       </div>
@@ -254,7 +135,7 @@ function openCustomBuilder() {
   }
 }
 
-// ── 5. Custom Bundle Builder ──────────────────────────────────────
+// â”€â”€ 5. Custom Bundle Builder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderCustomBuilder() {
   renderCategoryFilters();
   renderBookGrid();
@@ -298,7 +179,7 @@ function renderBookGrid() {
       tabindex="0"
       onkeydown="if(event.key==='Enter'||event.key===' ')toggleBook('${book.id}')"
     >
-      <div class="book-select-check">${selectedBookIds.has(book.id) ? '✓' : ''}</div>
+      <div class="book-select-check">${selectedBookIds.has(book.id) ? 'âœ“' : ''}</div>
       <div class="book-select-cat">${book.category}</div>
       <h4 class="book-select-title">${book.title}</h4>
       <p class="book-select-author">${book.author}</p>
@@ -319,7 +200,7 @@ function toggleBook(bookId) {
     const isSelected = selectedBookIds.has(bookId);
     card.classList.toggle('selected', isSelected);
     card.setAttribute('aria-checked', isSelected);
-    card.querySelector('.book-select-check').textContent = isSelected ? '✓' : '';
+    card.querySelector('.book-select-check').textContent = isSelected ? 'âœ“' : '';
   }
   updateCustomBuilderStats();
 }
@@ -347,7 +228,7 @@ function updateCustomBuilderStats() {
       hintEl.textContent = `Select ${remaining} more book${remaining !== 1 ? 's' : ''} to continue`;
       hintEl.className = 'selection-hint warn';
     } else {
-      hintEl.textContent = `${count} books selected — ready to add to cart!`;
+      hintEl.textContent = `${count} books selected â€” ready to add to cart!`;
       hintEl.className = 'selection-hint ok';
     }
   }
@@ -381,6 +262,7 @@ function addCustomBundleToCart() {
     qty: 1,
   });
 
+  saveCart();
   updateCartUI();
   openCart();
   showToast(`Custom bundle (${selected.length} books) added to cart!`);
@@ -391,7 +273,7 @@ function addCustomBundleToCart() {
   updateCustomBuilderStats();
 }
 
-// ── 6. Cart ───────────────────────────────────────────────────────
+// â”€â”€ 6. Cart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function addBundleToCart(bundleId) {
   const bundle = BUNDLES.find(b => b.id === bundleId);
   if (!bundle) return;
@@ -410,20 +292,23 @@ function addBundleToCart(bundleId) {
       books: bundle.books.map(b => b.title),
       qty: 1,
     });
-    showToast(`${bundle.name} added to cart! 🛒`);
+    showToast(`${bundle.name} added to cart! ðŸ›’`);
   }
 
+  saveCart();
   updateCartUI();
   openCart();
 }
 
 function removeFromCart(id) {
   cart = cart.filter(item => item.id !== id);
+  saveCart();
   updateCartUI();
   if (cart.length === 0) {
-    // If empty show empty state
-    document.getElementById('cartFooter').style.display = 'none';
-    document.getElementById('cartEmpty').style.display = 'flex';
+    const footerEl = document.getElementById('cartFooter');
+    const emptyEl = document.getElementById('cartEmpty');
+    if (footerEl) footerEl.style.display = 'none';
+    if (emptyEl) emptyEl.style.display = 'flex';
   }
 }
 
@@ -458,8 +343,8 @@ function updateCartUI() {
     if (cartItemsEl) {
       cartItemsEl.innerHTML = cart.map(item => {
         const icon = item.type === 'bundle'
-          ? (BUNDLES.find(b => b.id === item.id)?.tag || '📦')
-          : '✨';
+          ? (BUNDLES.find(b => b.id === item.id)?.tag || 'ðŸ“¦')
+          : 'âœ¨';
         const previewBooks = item.books.slice(0, 3).join(', ') + (item.books.length > 3 ? ` +${item.books.length - 3} more` : '');
 
         return `
@@ -472,7 +357,7 @@ function updateCartUI() {
             </div>
             <div class="cart-item-right">
               <span class="cart-item-price">${item.price * item.qty} Tk</span>
-              <button class="cart-remove" onclick="removeFromCart('${item.id}')" aria-label="Remove ${item.name}">✕ Remove</button>
+              <button class="cart-remove" onclick="removeFromCart('${item.id}')" aria-label="Remove ${item.name}">âœ• Remove</button>
             </div>
           </div>
         `;
@@ -507,7 +392,7 @@ function updateOrderCartSummary(totalPrice) {
   if (itemsEl) {
     itemsEl.innerHTML = cart.map(item => `
       <div class="order-cart-item">
-        <span class="order-cart-item-name">${item.name} × ${item.qty}</span>
+        <span class="order-cart-item-name">${item.name} Ã— ${item.qty}</span>
         <span class="order-cart-item-price">${item.price * item.qty} Tk</span>
       </div>
     `).join('');
@@ -540,23 +425,23 @@ function proceedToOrder() {
   }
 }
 
-// ── 7. Order Form ─────────────────────────────────────────────────
+// â”€â”€ 7. Order Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function updateOrderBundleSelect() {
   const select = document.getElementById('orderBundleSelect');
   if (!select) return;
 
   const bundleOptions = BUNDLES.map(b =>
-    `<option value="${b.id}">${b.name} — ${b.comboPrice} Tk</option>`
+    `<option value="${b.id}">${b.name} â€” ${b.comboPrice} Tk</option>`
   ).join('');
 
   const cartCustomOptions = cart
     .filter(item => item.type === 'custom')
     .map(item =>
-      `<option value="${item.id}">Custom Bundle (${item.subtitle}) — ${item.price} Tk</option>`
+      `<option value="${item.id}">Custom Bundle (${item.subtitle}) â€” ${item.price} Tk</option>`
     ).join('');
 
   select.innerHTML = `
-    <option value="">— Choose what you're ordering —</option>
+    <option value="">â€” Choose what you're ordering â€”</option>
     <optgroup label="Ready-Made Bundles">${bundleOptions}</optgroup>
     ${cartCustomOptions ? `<optgroup label="Your Custom Bundle">${cartCustomOptions}</optgroup>` : ''}
   `;
@@ -605,7 +490,7 @@ function validateForm() {
   return valid;
 }
 
-// ── Google Sheets Configuration ─────────────────────────────────────
+// â”€â”€ Google Sheets Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Paste your Google Apps Script Web App URL below after deploying:
 const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzuGmJiTrVeiDnqjY3gaJwLtkqqmDdFoaG1Gspqge3EVKLima4TaHronO3ukAcbZm6MHQ/exec';
 
@@ -651,11 +536,11 @@ function handleOrderSubmit(e) {
     successEl.style.display = 'block';
 
     document.getElementById('successDetails').innerHTML = `
-      <strong>📛 Name:</strong> ${name}<br>
-      <strong>📞 Phone:</strong> ${phone}<br>
-      <strong>📦 Order:</strong> ${selectedBundle}<br>
-      <strong>💳 Payment:</strong> ${paymentMethod}<br>
-      <strong>🏠 Address:</strong> ${address}${notes ? `<br><strong>📝 Notes:</strong> ${notes}` : ''}
+      <strong>ðŸ“› Name:</strong> ${name}<br>
+      <strong>ðŸ“ž Phone:</strong> ${phone}<br>
+      <strong>ðŸ“¦ Order:</strong> ${selectedBundle}<br>
+      <strong>ðŸ’³ Payment:</strong> ${paymentMethod}<br>
+      <strong>ðŸ  Address:</strong> ${address}${notes ? `<br><strong>ðŸ“ Notes:</strong> ${notes}` : ''}
     `;
 
     successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -695,7 +580,7 @@ function resetOrderForm() {
   }
 }
 
-// ── 8. Toast Notification ─────────────────────────────────────────
+// â”€â”€ 8. Toast Notification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let toastTimer = null;
 function showToast(msg) {
   let toast = document.getElementById('toastEl');
@@ -713,13 +598,13 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
-// ── 9. Header scroll shadow ───────────────────────────────────────
+// â”€â”€ 9. Header scroll shadow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const header = document.querySelector('.site-header');
 const onScroll = () => header && header.classList.toggle('scrolled', window.scrollY > 10);
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-// ── 10. Mobile nav ────────────────────────────────────────────────
+// â”€â”€ 10. Mobile nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');
 const mobileClose = document.getElementById('mobileNavClose');
@@ -743,7 +628,7 @@ if (mobileClose) mobileClose.addEventListener('click', closeMobileNav);
 mobileLinks.forEach(link => link.addEventListener('click', closeMobileNav));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMobileNav(); closeCart(); } });
 
-// ── 11. Cart interactions ─────────────────────────────────────────
+// â”€â”€ 11. Cart interactions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('cartBtn')?.addEventListener('click', openCart);
 document.getElementById('cartCloseBtn')?.addEventListener('click', closeCart);
 document.getElementById('cartOverlay')?.addEventListener('click', closeCart);
@@ -751,7 +636,7 @@ document.getElementById('cartCheckoutBtn')?.addEventListener('click', proceedToO
 document.getElementById('addCustomToCartBtn')?.addEventListener('click', addCustomBundleToCart);
 document.getElementById('clearSelectionBtn')?.addEventListener('click', clearCustomSelection);
 
-// ── 12. Order form ────────────────────────────────────────────────
+// â”€â”€ 12. Order form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('orderForm')?.addEventListener('submit', handleOrderSubmit);
 
 // Remove invalid class on input
@@ -764,7 +649,7 @@ document.getElementById('orderForm')?.addEventListener('submit', handleOrderSubm
   });
 });
 
-// ── 13. Smooth scroll for anchor links ───────────────────────────
+// â”€â”€ 13. Smooth scroll for anchor links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
@@ -782,25 +667,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ── 14. Reveal static elements ───────────────────────────────────
+// â”€â”€ 14. Reveal static elements â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.querySelectorAll('.step-card, .perk, .order-left, .order-right').forEach((el, i) => {
   observeReveal(el, el.classList.contains('step-card') ? (i % 3) * 80 : 0);
 });
 
-// ── 15. Footer year ───────────────────────────────────────────────
+// â”€â”€ 15. Footer year â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ── 16. URL param pre-select ──────────────────────────────────────
+// â”€â”€ 16. URL param pre-select â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const preselected = new URLSearchParams(window.location.search).get('bundle');
 if (preselected) window.__preselectedBundle = preselected;
 
-// ── 17. Init ──────────────────────────────────────────────────────
+// â”€â”€ 17. Init â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 renderBundles();
 renderCustomBuilder();
 updateCartUI();
 updateOrderBundleSelect();
 
-// ── 18. Live Sales Ticker ─────────────────────────────────────────
+// â”€â”€ 18. Live Sales Ticker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 (function initSalesTicker() {
   const tickerEl = document.getElementById('tickerText');
   if (!tickerEl) return;
@@ -823,12 +708,12 @@ updateOrderBundleSelect();
 
   // Pool of message templates
   const templates = [
-    () => `⚡ Someone from ${randomFrom(cities)} just ordered "${randomFrom(bundleNames)}" — ${randomMinutes()} min ago`,
-    () => `🔥 ${randomOrders()} bundles ordered in the last hour — spots filling fast!`,
-    () => `⚡ "${randomFrom(bundleNames)}" is trending today — ordered ${randomOrders()} times already`,
-    () => `📦 A reader from ${randomFrom(cities)} just completed their order — ${randomMinutes()} min ago`,
-    () => `✅ ${randomOrders()} happy readers placed orders today. Join them!`,
-    () => `⚡ Someone from ${randomFrom(cities)} picked "${randomFrom(bundleNames)}" — ${randomMinutes()} min ago`,
+    () => `âš¡ Someone from ${randomFrom(cities)} just ordered "${randomFrom(bundleNames)}" â€” ${randomMinutes()} min ago`,
+    () => `ðŸ”¥ ${randomOrders()} bundles ordered in the last hour â€” spots filling fast!`,
+    () => `âš¡ "${randomFrom(bundleNames)}" is trending today â€” ordered ${randomOrders()} times already`,
+    () => `ðŸ“¦ A reader from ${randomFrom(cities)} just completed their order â€” ${randomMinutes()} min ago`,
+    () => `âœ… ${randomOrders()} happy readers placed orders today. Join them!`,
+    () => `âš¡ Someone from ${randomFrom(cities)} picked "${randomFrom(bundleNames)}" â€” ${randomMinutes()} min ago`,
   ];
 
   let currentIdx = 0;
@@ -854,7 +739,7 @@ updateOrderBundleSelect();
   setInterval(nextMessage, 5000);
 })();
 
-// ── 19. Sticky Mobile CTA Bar ─────────────────────────────────────
+// â”€â”€ 19. Sticky Mobile CTA Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 (function initStickyCta() {
   const bar       = document.getElementById('stickyCta');
   const totalEl   = document.getElementById('stickyCtaTotal');

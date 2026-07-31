@@ -4,13 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Box Collection — Curated Book Bundles</title>
-  <meta name="description"
-    content="Box Collection brings you thoughtfully curated book bundles delivered to your door. Pick a bundle, build your own, and we'll handle the rest." />
-  <meta property="og:title" content="Box Collection — Curated Book Bundles" />
-  <meta property="og:description" content="Thoughtfully curated book bundles delivered to your door." />
-  <meta property="og:image" content="images/hero.png" />
-  <meta property="og:type" content="website" />
+  <title>Combo — Box Collection</title>
+  <meta name="description" content="Explore this curated book bundle from Box Collection." />
+  <meta property="og:title" content="Combo — Box Collection" />
+  <meta property="og:type" content="product" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,17 +24,17 @@
   <!-- ═══════════════════════════════════════════ HEADER ═══ -->
   <header class="site-header" id="top">
     <div class="container header-inner">
-      <a href="#top" class="logo" aria-label="Box Collection home">
+      <a href="index.html" class="logo" aria-label="Box Collection home">
         <span class="logo-icon">📦</span>
         <span class="logo-text">Box Collection</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <ul class="nav-list">
-          <li><a href="#bundles" class="nav-link">Bundles</a></li>
-          <li><a href="#custom-bundle" class="nav-link">Custom Bundle</a></li>
-          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#bundles" class="nav-link">Bundles</a></li>
+          <li><a href="index.html#custom-bundle" class="nav-link">Custom Bundle</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
           <li><a href="#order" class="nav-link">Order</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
         </ul>
         <button class="cart-icon-btn" id="cartBtn" aria-label="View cart (0 items)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -60,11 +57,11 @@
   <div class="mobile-nav" id="mobileNav" aria-hidden="true">
     <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
     <ul class="mobile-nav-list">
-      <li><a href="#bundles" class="mobile-nav-link">Bundles</a></li>
-      <li><a href="#custom-bundle" class="mobile-nav-link">Custom Bundle</a></li>
-      <li><a href="#how-it-works" class="mobile-nav-link">How It Works</a></li>
+      <li><a href="index.html#bundles" class="mobile-nav-link">Bundles</a></li>
+      <li><a href="index.html#custom-bundle" class="mobile-nav-link">Custom Bundle</a></li>
+      <li><a href="index.html#how-it-works" class="mobile-nav-link">How It Works</a></li>
       <li><a href="#order" class="mobile-nav-link">Order</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      <li><a href="index.html#contact" class="mobile-nav-link">Contact</a></li>
     </ul>
     <a href="#order" class="btn btn-primary mobile-nav-cta">Order Now</a>
   </div>
@@ -80,7 +77,7 @@
       <div class="cart-empty" id="cartEmpty">
         <span class="cart-empty-icon">🛒</span>
         <p>Your cart is empty.</p>
-        <a href="#bundles" class="btn btn-ghost btn-sm" onclick="closeCart()">Browse Bundles</a>
+        <a href="index.html#bundles" class="btn btn-ghost btn-sm">Browse Bundles</a>
       </div>
       <div class="cart-items" id="cartItems"></div>
     </div>
@@ -97,197 +94,35 @@
   </aside>
 
   <main>
-    <!-- ═══════════════════════════════════════════ HERO ═══ -->
-    <section class="hero" id="hero">
-      <div class="container hero-inner">
-        <div class="hero-content">
-          <span class="hero-eyebrow">Thoughtfully Curated</span>
-          <h1 class="hero-headline">Books you'll love,<br /><em>bundled with care.</em></h1>
-          <p class="hero-sub">
-            Each Box Collection bundle is hand-picked for readers who love
-            to get lost in a good story. Choose a ready-made bundle or
-            build your own — we'll deliver joy straight to your door.
-          </p>
-          <div class="hero-actions">
-            <a href="#bundles" class="btn btn-primary btn-lg" id="hero-cta">Browse Bundles</a>
-            <a href="#custom-bundle" class="btn btn-ghost btn-lg">Build Your Own</a>
-          </div>
-          <div class="hero-trust">
-            <span class="trust-chip">📚 Handpicked titles</span>
-            <span class="trust-chip">🚚 Fast delivery</span>
-            <span class="trust-chip">💝 Gift-ready packaging</span>
-          </div>
-        </div>
-        <div class="hero-image-wrap">
-          <div class="hero-image-blob">
-            <img src="images/hero.png"
-              alt="Box Collection hero display featuring a stack of blue books on a marble podium with blue leaf accents"
-              class="hero-img" width="600" height="600" />
-          </div>
-          <div class="hero-badge">
-            <span class="badge-number">6+</span>
-            <span class="badge-label">Curated<br>Bundles</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-wave">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F0F5FC" />
-        </svg>
-      </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════════ SALES TICKER ═══ -->
-    <div class="sales-ticker" id="salesTicker" aria-live="polite" aria-atomic="true">
-      <div class="ticker-inner">
-        <span class="ticker-dot"></span>
-        <span class="ticker-text" id="tickerText">⚡ Loading recent orders…</span>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════ BUNDLES ═══ -->
-    <section class="bundles-section section" id="bundles">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-eyebrow">Our Collections</span>
-          <h2 class="section-title">The Combo</h2>
-          <p class="section-sub">Every bundle is a story waiting to happen. Individual book prices shown in <span
-              class="price-sample">green</span> — see exactly what you save with each combo!</p>
-        </div>
-        <!-- Cards rendered dynamically by main.js -->
-        <div class="bundles-grid" id="bundlesGrid"></div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ CUSTOM BUNDLE ═══ -->
-    <section class="custom-bundle-section section" id="custom-bundle" style="display: none;">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-eyebrow custom-eyebrow">Build Your Own</span>
-          <h2 class="section-title">Custom Bundle</h2>
-          <p class="section-sub">Mix and match from our full collection of 29 books. Select <strong>at least 5
-              books</strong> to build your personalised bundle.</p>
-        </div>
-
-        <!-- Category filters -->
-        <div class="category-filters" id="categoryFilters" role="group" aria-label="Filter books by category"></div>
-
-        <!-- Book selection grid -->
-        <div class="custom-books-grid" id="customBuilderBooks"></div>
-
-        <!-- Sticky selection bar -->
-        <div class="custom-bundle-bar" id="customBundleBar">
-          <div class="custom-bundle-stats">
-            <div class="cb-stat">
-              <span class="cb-stat-val" id="selectionCounter">0</span>
-              <span class="cb-stat-label">Books Selected</span>
-            </div>
-            <div class="cb-divider"></div>
-            <div class="cb-stat">
-              <span class="cb-stat-val price-val" id="customTotal">0 Tk</span>
-              <span class="cb-stat-label">Your Total</span>
-            </div>
-          </div>
-          <div class="custom-bundle-actions">
-            <p class="selection-hint" id="selectionHint">Pick at least 5 books to continue</p>
-            <div class="custom-action-btns">
-              <button class="btn btn-ghost btn-sm" id="clearSelectionBtn">Clear</button>
-              <button class="btn btn-custom btn-lg" id="addCustomToCartBtn" disabled>
-                🛒 Add to Cart
-              </button>
-            </div>
+    <!-- ═══════════════════════════════════════════ COMBO HERO ═══ -->
+    <section class="combo-hero" id="comboHero">
+      <div class="container combo-hero-inner" id="comboHeroInner">
+        <!-- Skeleton while JS loads -->
+        <div class="combo-hero-skeleton">
+          <div class="skeleton" style="height:460px;flex:1;border-radius:20px;"></div>
+          <div style="flex:1.1;display:flex;flex-direction:column;gap:1rem;">
+            <div class="skeleton" style="height:18px;width:30%;border-radius:8px;"></div>
+            <div class="skeleton" style="height:52px;width:85%;border-radius:8px;"></div>
+            <div class="skeleton" style="height:18px;width:65%;border-radius:8px;"></div>
+            <div class="skeleton" style="height:100px;border-radius:8px;"></div>
+            <div class="skeleton" style="height:60px;border-radius:999px;"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════ HOW IT WORKS ═══ -->
-    <section class="how-section section" id="how-it-works">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-eyebrow">Simple &amp; Easy</span>
-          <h2 class="section-title">How it works</h2>
-          <p class="section-sub">Three easy steps between you and your next great read.</p>
-        </div>
-        <div class="steps-strip">
-          <div class="step-card">
-            <div class="step-icon-wrap">
-              <span class="step-icon">📚</span>
-            </div>
-            <div class="step-number">01</div>
-            <h3 class="step-title">Pick a bundle</h3>
-            <p class="step-desc">Browse our curated collections or build your own custom bundle of 5+ books.</p>
-          </div>
-          <div class="step-connector" aria-hidden="true">
-            <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0,10 Q30,0 60,10" stroke="#93C5FD" stroke-width="2" fill="none" stroke-dasharray="5,4" />
-              <polygon points="56,6 64,10 56,14" fill="#93C5FD" />
-            </svg>
-          </div>
-          <div class="step-card">
-            <div class="step-icon-wrap">
-              <span class="step-icon">✍️</span>
-            </div>
-            <div class="step-number">02</div>
-            <h3 class="step-title">Fill the form</h3>
-            <p class="step-desc">Give us your details and delivery address. It takes less than a minute.</p>
-          </div>
-          <div class="step-connector" aria-hidden="true">
-            <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0,10 Q30,0 60,10" stroke="#E8AFAA" stroke-width="2" fill="none" stroke-dasharray="5,4" />
-              <polygon points="56,6 64,10 56,14" fill="#E8AFAA" />
-            </svg>
-          </div>
-          <div class="step-card">
-            <div class="step-icon-wrap">
-              <span class="step-icon">🚚</span>
-            </div>
-            <div class="step-number">03</div>
-            <h3 class="step-title">We confirm &amp; ship</h3>
-            <p class="step-desc">We'll reach out to confirm your order and dispatch your bundle with love.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ TRUST BADGES ═══ -->
-    <section class="trust-strip" aria-label="Why shop with us">
-      <div class="container trust-strip-inner">
-        <div class="trust-badge">
-          <div class="trust-badge-icon">🚚</div>
-          <div class="trust-badge-text">
-            <strong>Fast Delivery</strong>
-            <span>Dhaka & nationwide</span>
-          </div>
-        </div>
-        <div class="trust-badge">
-          <div class="trust-badge-icon">🔄</div>
-          <div class="trust-badge-text">
-            <strong>Easy Exchange</strong>
-            <span>7-day hassle-free</span>
-          </div>
-        </div>
-        <div class="trust-badge">
-          <div class="trust-badge-icon">💵</div>
-          <div class="trust-badge-text">
-            <strong>Cash on Delivery</strong>
-            <span>bKash & Nagad too</span>
-          </div>
-        </div>
-        <div class="trust-badge">
-          <div class="trust-badge-icon">📞</div>
-          <div class="trust-badge-text">
-            <strong>Order Confirmed</strong>
-            <span>We call before shipping</span>
-          </div>
-        </div>
+    <!-- ═══════════════════════════════════════════ BOOKS INSIDE ═══ -->
+    <section class="combo-books-section section" id="comboBooksSection">
+      <div class="container" id="comboBooksInner">
+        <!-- Rendered by combo.js -->
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════ ORDER FORM ═══ -->
     <section class="order-section section" id="order">
       <div class="container order-inner">
-        <div class="order-left reveal">
+        <div class="order-left">
           <span class="section-eyebrow">Ready to order?</span>
           <h2 class="section-title">Place your order</h2>
           <p class="section-sub">Fill in your details below and we'll confirm your bundle and delivery soon.</p>
@@ -320,7 +155,7 @@
           </div>
         </div>
 
-        <div class="order-right reveal">
+        <div class="order-right">
           <div id="orderFormWrap">
             <form class="order-form" id="orderForm" novalidate>
               <h3 class="form-title">Order Details</h3>
@@ -334,11 +169,12 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="orderPhone">Phone Number <span class="req">*</span></label>
-                  <input class="form-input" type="tel" id="orderPhone" name="phone" placeholder="+8801977936597"
+                  <input class="form-input" type="tel" id="orderPhone" name="phone" placeholder="+8801XXXXXXXXX"
                     autocomplete="tel" required />
                   <span class="form-err" id="errPhone"></span>
                 </div>
               </div>
+
               <div class="form-group">
                 <label class="form-label" for="orderAddress">Delivery Address <span class="req">*</span></label>
                 <textarea class="form-input form-textarea" id="orderAddress" name="address"
@@ -388,7 +224,8 @@
                 <span class="btn-text"> Place My Order</span>
                 <span class="btn-loader" style="display:none;">⏳ Placing order...</span>
               </button>
-              <p class="form-disclaimer">By placing an order you agree to be contacted by our team for confirmation.</p>
+              <p class="form-disclaimer">By placing an order you agree to be contacted by our team for
+                confirmation.</p>
             </form>
           </div>
 
@@ -404,13 +241,27 @@
         </div>
       </div>
     </section>
+
+    <!-- ═══════════════════════════════════════════ RELATED COMBOS ═══ -->
+    <section class="related-combos-section section" id="relatedCombosSection">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">More to Explore</span>
+          <h2 class="section-title">Other Combos You'll Love</h2>
+        </div>
+        <div class="bundles-grid" id="relatedCombosGrid">
+          <!-- Rendered by combo.js -->
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ═══════════════════════════════════════════ FOOTER ═══ -->
   <footer class="site-footer" id="contact">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="#top" class="logo" aria-label="Box Collection home">
+        <a href="index.html" class="logo" aria-label="Box Collection home">
           <span class="logo-icon">📦</span>
           <span class="logo-text">Box Collection</span>
         </a>
@@ -420,16 +271,16 @@
         <div class="footer-col">
           <h4 class="footer-col-title">Quick Links</h4>
           <ul class="footer-list">
-            <li><a href="#bundles">Bundles</a></li>
-            <li><a href="#custom-bundle">Custom Bundle</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="index.html#bundles">Bundles</a></li>
+            <li><a href="index.html#custom-bundle">Custom Bundle</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
             <li><a href="#order">Order</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">Contact</h4>
           <ul class="footer-list">
-            <li><a href="tel:+8801XXXXXXXXX"> Phone: +8801977936597</a></li>
+            <li><a href="tel:+8801977936597"> Phone: +8801977936597</a></li>
             <li><a href="mailto:hello@boxcollection.com">Email: hello@boxcollection.com</a></li>
           </ul>
         </div>
@@ -467,19 +318,19 @@
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════ STICKY MOBILE CTA ═══ -->
+  <!-- Sticky mobile CTA -->
   <div class="sticky-cta-bar" id="stickyCta" aria-hidden="true">
     <div class="sticky-cta-inner">
       <div class="sticky-cta-info">
         <span class="sticky-cta-label">🛒 Your cart</span>
         <strong class="sticky-cta-total" id="stickyCtaTotal">0 Tk</strong>
       </div>
-      <a href="#order" class="btn btn-primary sticky-cta-btn" id="stickyCtaBtn">Order Now →</a>
+      <a href="#order" class="btn btn-primary sticky-cta-btn">Order Now →</a>
     </div>
   </div>
 
   <script src="data.js"></script>
-  <script src="main.js"></script>
+  <script src="combo.js"></script>
 </body>
 
 </html>
